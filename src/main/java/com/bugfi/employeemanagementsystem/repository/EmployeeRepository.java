@@ -9,8 +9,19 @@ import java.util.Optional;
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee,Long> {
     @Override
-    Optional<Employee> findById(Long employeeId);
+    Employee findById(Long employeeId);
 
     @Override
     Employee save(Employee employee);
+
+    Object findAll();
+
+    @Modifying
+    @Query("DELETE FROM Employee")
+    void deleteAll();
+
+    @Modifying
+    @Query("DELETE FROM Employee e WHERE e.id = :employeeId")
+    void delete(Long employeeId);
+
 }
