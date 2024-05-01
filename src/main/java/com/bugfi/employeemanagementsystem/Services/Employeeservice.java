@@ -6,6 +6,8 @@ import com.bugfi.employeemanagementsystem.models.Employee;
 import com.bugfi.employeemanagementsystem.repository.EmployeeRepository;
 
 import java.util.List;
+import java.util.Optional;
+
 public class Employeeservice implements IEmployeeServices {
 
     private EmployeeRepository employeeRepository;
@@ -16,8 +18,8 @@ public class Employeeservice implements IEmployeeServices {
     }
 
     @Override
-    public Employee getEmployee(Long id) {
-        return (Employee) employeeRepository.findById(id);
+    public Optional<Employee> getEmployee(Long id) {
+        return employeeRepository.findById(id);
     }
 
     @Override
@@ -47,8 +49,8 @@ public class Employeeservice implements IEmployeeServices {
     public void verifyAdmin(Admin admin) {
         String password = admin.getPassword();
         try {
-            Admin verif = adminServices.getAdmin(admin);
-            if (!password.equals(verif.getPassword())) {
+            Admin verify = adminServices.getAdmin(admin);
+            if (!password.equals(verify.getPassword())) {
                 throw new AdminNotFoundException("Admin not found", "Invalid password");
             }
         } catch (AdminNotFoundException e) {
