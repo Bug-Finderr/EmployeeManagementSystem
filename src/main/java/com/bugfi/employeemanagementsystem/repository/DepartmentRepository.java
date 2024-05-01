@@ -1,16 +1,16 @@
 package com.bugfi.employeemanagementsystem.repository;
 
-import com.bugfi.employeemanagementsystem.models.Role;
+import com.bugfi.employeemanagementsystem.models.Department;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface RoleRepository extends JpaRepository<Role,Long> {
+public interface DepartmentRepository extends JpaRepository<Department,Long> {
     @Override
-    Optional<Role> findById(Long id);
+    Optional<Department> findById(Long id);
 
     @Override
-    Role save(Role role);
+    Department save(Department department);
 }

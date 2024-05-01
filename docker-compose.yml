@@ -5,9 +5,9 @@ services:
     ports:
       - "6969:5432"
     environment:
-      POSTGRES_USER: bugfinderr
-      POSTGRES_PASSWORD: bugfi
-      POSTGRES_DB: fakestore
+      POSTGRES_USER: employee
+      POSTGRES_PASSWORD: group13
+      POSTGRES_DB: group13
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
