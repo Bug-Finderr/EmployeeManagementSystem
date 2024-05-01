@@ -8,7 +8,7 @@ import java.util.Optional;
 
 @Repository
 public interface AdminRepository extends JpaRepository<Admin,Long> {
-    Optional<Admin> findByUsername(String name);
+    Admin findByUsername(String name);
 
     @Override
     Admin save(Admin admin);
