@@ -1,6 +1,8 @@
 package com.bugfi.employeemanagementsystem.exceptionhandlers;
 
 import com.bugfi.employeemanagementsystem.dtos.ExceptionDto;
+import com.bugfi.employeemanagementsystem.exceptions.AdminNotFoundException;
+
 import com.bugfi.employeemanagementsystem.exceptions.DepartmentNotFoundException;
 import com.bugfi.employeemanagementsystem.exceptions.EmployeeNotFoundException;
 import com.bugfi.employeemanagementsystem.exceptions.RoleNotFoundException;
@@ -30,6 +32,13 @@ public class GlobalExceptionHandler {
         ExceptionDto dto = new ExceptionDto();
         dto.setMessage( e.name + " does not exist");
         dto.setResolution("Role Not Found");
+        return new ResponseEntity<>(dto, HttpStatus.NOT_FOUND);
+    }
+    @ExceptionHandler(AdminNotFoundException.class)
+    public ResponseEntity<ExceptionDto> handleAdimNotFoundException(AdminNotFoundException e) {
+        ExceptionDto dto = new ExceptionDto();
+        dto.setMessage(e.name + " not found");
+        dto.setResolution("Cannot authorise");
         return new ResponseEntity<>(dto, HttpStatus.NOT_FOUND);
     }
 }
