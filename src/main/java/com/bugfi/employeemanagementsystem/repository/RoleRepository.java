@@ -1,0 +1,9 @@
+package com.bugfi.employeemanagementsystem.repository;
+
+import com.bugfi.employeemanagementsystem.models.Role;
+
+import java.util.Optional;
+
+public interface RoleRepository extends JpaRepository<Role,Long>{
+    Optional<Role> findByName(String name);
+}
