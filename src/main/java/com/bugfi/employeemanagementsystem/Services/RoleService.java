@@ -10,7 +10,7 @@ import com.bugfi.employeemanagementsystem.repository.RoleRepository;
 public class RoleService implements IRoleServices {
     private RoleRepository roleRepository;
     private AdminServices adminServices;
-    private Employeeservice employeeservice;
+    private EmployeeService employeeservice;
     private EmployeeRepository employeeRepository;
 
     @Override

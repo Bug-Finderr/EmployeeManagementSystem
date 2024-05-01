@@ -1,14 +1,17 @@
-package com.bugfi.employeemanagementsystem.services;
+package com.bugfi.employeemanagementsystem.Services;
 
 import com.bugfi.employeemanagementsystem.exceptions.AdminNotFoundException;
 import com.bugfi.employeemanagementsystem.models.Admin;
 import com.bugfi.employeemanagementsystem.models.Department;
 import com.bugfi.employeemanagementsystem.repository.DepartmentRepository;
-
+import com.bugfi.employeemanagementsystem.services.IDepartmentServices;
 import java.util.List;
 import java.util.Optional;
+import com.bugfi.employeemanagementsystem.Services.AdminServices;
+import org.springframework.stereotype.Service;
 
-public class DepartmentServices implements  IDepartmentServices{
+@Service
+public class DepartmentServices implements IDepartmentServices {
     private DepartmentRepository departmentRepository;
     AdminServices adminServices;
 

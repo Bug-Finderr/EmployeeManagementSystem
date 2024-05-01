@@ -8,7 +8,7 @@ import com.bugfi.employeemanagementsystem.repository.EmployeeRepository;
 import java.util.List;
 import java.util.Optional;
 
-public class Employeeservice implements IEmployeeServices {
+public class EmployeeService implements IEmployeeServices {
 
     private EmployeeRepository employeeRepository;
     AdminServices adminServices;
@@ -24,14 +24,14 @@ public class Employeeservice implements IEmployeeServices {
 
     @Override
     public void addEmployee(Employee e) {
-        Employee  emp =  (Employee) employeeRepository.save(e);
+        Optional<Employee>  emp =  employeeRepository.save(e);
     }
 
     @Override
     public void updateEmployee(Employee emp, Long id, Admin admin) {
         verifyAdmin(admin);
         emp.setId(id);
-        Employee e = employeeRepository.save(emp);
+        Optional<Employee> e = employeeRepository.save(emp);
     }
 
     @Override
@@ -45,6 +45,8 @@ public class Employeeservice implements IEmployeeServices {
         verifyAdmin(admin);
         employeeRepository.delete(id);
     }
+
+
 
     public void verifyAdmin(Admin admin) {
         String password = admin.getPassword();

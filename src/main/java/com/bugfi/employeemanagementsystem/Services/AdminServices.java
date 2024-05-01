@@ -1,9 +1,12 @@
-package com.bugfi.employeemanagementsystem.services;
+package com.bugfi.employeemanagementsystem.Services;
 
 import com.bugfi.employeemanagementsystem.models.Admin;
 import com.bugfi.employeemanagementsystem.repository.AdminRepository;
+import com.bugfi.employeemanagementsystem.services.IAdminServices;
+import org.springframework.stereotype.Service;
 
-public class AdminServices implements IAdminServices{
+@Service
+public class AdminServices implements IAdminServices {
     private AdminRepository adminRepository;
     @Override
     public void addAdmin(Admin admin) {
