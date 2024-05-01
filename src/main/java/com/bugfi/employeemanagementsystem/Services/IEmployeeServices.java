@@ -1,4 +1,4 @@
-package com.bugfi.employeemanagementsystem.services;
+package com.bugfi.employeemanagementsystem.Services;
 
 import com.bugfi.employeemanagementsystem.models.Admin;
 import com.bugfi.employeemanagementsystem.models.Employee;
@@ -6,7 +6,7 @@ import java.util.*;
 public interface IEmployeeServices {
     List<Employee> getAllEmployees();
 
-    Employee getEmployee(Long id);
+    Optional<Employee> getEmployee(Long id);
 
     void addEmployee(Employee e);
 

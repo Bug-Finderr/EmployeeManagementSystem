@@ -6,14 +6,16 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee,Long> {
     Employee findEmployeeById(Long employeeId);
 
     @Override
-    Employee save(Employee employee);
+    Optional<Employee> save(Employee employee);
 
     List<Employee> findAll();
 

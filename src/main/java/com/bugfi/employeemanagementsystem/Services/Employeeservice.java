@@ -1,35 +1,39 @@
-package com.bugfi.employeemanagementsystem.services;
+package com.bugfi.employeemanagementsystem.Services;
 
 import com.bugfi.employeemanagementsystem.exceptions.AdminNotFoundException;
 import com.bugfi.employeemanagementsystem.models.Admin;
 import com.bugfi.employeemanagementsystem.models.Employee;
 import com.bugfi.employeemanagementsystem.repository.EmployeeRepository;
-
+import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
+
+import com.bugfi.employeemanagementsystem.Services.IEmployeeServices;
+@Service
 public class Employeeservice implements IEmployeeServices {
 
     private EmployeeRepository employeeRepository;
-    AdminServices adminServices;
+    com.bugfi.employeemanagementsystem.Services.AdminServices adminServices;
     @Override
     public List<Employee> getAllEmployees() {
         return (List<Employee>) employeeRepository.findAll();
     }
 
     @Override
-    public Employee getEmployee(Long id) {
-        return (Employee) employeeRepository.findById(id);
+    public Optional<Employee> getEmployee(Long id) {
+        return employeeRepository.findById(id);
     }
 
     @Override
     public void addEmployee(Employee e) {
-        Employee  emp =  (Employee) employeeRepository.save(e);
+        Optional<Employee>  emp =  employeeRepository.save(e);
     }
 
     @Override
     public void updateEmployee(Employee emp, Long id, Admin admin) {
         verifyAdmin(admin);
         emp.setId(id);
-        Employee e = employeeRepository.save(emp);
+        Optional<Employee> e = employeeRepository.save(emp);
     }
 
     @Override
@@ -43,6 +47,8 @@ public class Employeeservice implements IEmployeeServices {
         verifyAdmin(admin);
         employeeRepository.delete(id);
     }
+
+
 
     public void verifyAdmin(Admin admin) {
         String password = admin.getPassword();
