@@ -2,6 +2,7 @@ package com.bugfi.employeemanagementsystem.exceptionhandlers;
 
 import com.bugfi.employeemanagementsystem.dtos.ExceptionDto;
 import com.bugfi.employeemanagementsystem.exceptions.AdminNotFoundException;
+
 import com.bugfi.employeemanagementsystem.exceptions.DepartmentNotFoundException;
 import com.bugfi.employeemanagementsystem.exceptions.EmployeeNotFoundException;
 import com.bugfi.employeemanagementsystem.exceptions.RoleNotFoundException;
