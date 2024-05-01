@@ -8,7 +8,7 @@ import com.bugfi.employeemanagementsystem.repository.EmployeeRepository;
 import java.util.List;
 import java.util.Optional;
 
-public class Employeeservice implements IEmployeeServices {
+public class EmployeeService implements IEmployeeServices {
 
     private EmployeeRepository employeeRepository;
     AdminServices adminServices;

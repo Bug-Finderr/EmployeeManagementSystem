@@ -10,7 +10,7 @@ import com.bugfi.employeemanagementsystem.repository.RoleRepository;
 public class RoleService implements IRoleServices {
     private RoleRepository roleRepository;
     private AdminServices adminServices;
-    private Employeeservice employeeservice;
+    private EmployeeService employeeservice;
     private EmployeeRepository employeeRepository;
 
     @Override
@@ -33,7 +33,6 @@ public class RoleService implements IRoleServices {
     public void getEmployeesByRole(Role role) {
         roleRepository.findById(role.getId());
     }
-
 
     public void verifyAdmin(Admin admin) {
         String password = admin.getPassword();
