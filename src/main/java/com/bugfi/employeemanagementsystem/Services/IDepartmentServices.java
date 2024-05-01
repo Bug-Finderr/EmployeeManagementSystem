@@ -1,14 +1,15 @@
-package com.bugfi.employeemanagementsystem.Services;
+package com.bugfi.employeemanagementsystem.services;
 
 import com.bugfi.employeemanagementsystem.models.Admin;
 import com.bugfi.employeemanagementsystem.models.Department;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface IDepartmentServices {
     List<Department> getAllDepartments(Admin admin);
 
-    Department getDepartmentById(Long id);
+    Optional<Department> getDepartmentById(Long id);
 
     void addDepartment(Department d,Admin admin);
 

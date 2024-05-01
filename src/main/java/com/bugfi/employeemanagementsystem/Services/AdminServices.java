@@ -1,4 +1,4 @@
-package com.bugfi.employeemanagementsystem.Services;
+package com.bugfi.employeemanagementsystem.services;
 
 import com.bugfi.employeemanagementsystem.models.Admin;
 import com.bugfi.employeemanagementsystem.repository.AdminRepository;

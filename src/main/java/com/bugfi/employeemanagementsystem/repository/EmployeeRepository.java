@@ -2,19 +2,20 @@ package com.bugfi.employeemanagementsystem.repository;
 
 import com.bugfi.employeemanagementsystem.models.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
+import java.util.List;
 
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee,Long> {
-    @Override
-    Employee findById(Long employeeId);
+    Employee findEmployeeById(Long employeeId);
 
     @Override
     Employee save(Employee employee);
 
-    Object findAll();
+    List<Employee> findAll();
 
     @Modifying
     @Query("DELETE FROM Employee")

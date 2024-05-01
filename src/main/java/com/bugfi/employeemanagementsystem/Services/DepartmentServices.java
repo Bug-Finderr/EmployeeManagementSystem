@@ -1,4 +1,4 @@
-package com.bugfi.employeemanagementsystem.Services;
+package com.bugfi.employeemanagementsystem.services;
 
 import com.bugfi.employeemanagementsystem.exceptions.AdminNotFoundException;
 import com.bugfi.employeemanagementsystem.models.Admin;
@@ -6,10 +6,12 @@ import com.bugfi.employeemanagementsystem.models.Department;
 import com.bugfi.employeemanagementsystem.repository.DepartmentRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public class DepartmentServices implements  IDepartmentServices{
     private DepartmentRepository departmentRepository;
     AdminServices adminServices;
+
     @Override
     public List<Department> getAllDepartments(Admin admin) {
         List<Department> departments = (List<Department>) departmentRepository.findAll();
@@ -17,8 +19,8 @@ public class DepartmentServices implements  IDepartmentServices{
     }
 
     @Override
-    public Department getDepartmentById(Long id) {
-        Department department = (Department) departmentRepository.findById(id);
+    public Optional<Department> getDepartmentById(Long id) {
+        Optional<Department> department = departmentRepository.findById(id);
         return department;
     }
 
