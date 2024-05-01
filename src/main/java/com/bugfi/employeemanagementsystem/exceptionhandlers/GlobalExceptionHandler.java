@@ -1,4 +1,4 @@
-package com.bugfi.employeemanagementsystem.exceptionhandlers;
+package com.bugfi.employeemanagementsystem.exceptionHandlers;
 
 import com.bugfi.employeemanagementsystem.dtos.ExceptionDto;
 import com.bugfi.employeemanagementsystem.exceptions.AdminNotFoundException;
@@ -20,6 +20,7 @@ public class GlobalExceptionHandler {
         dto.setResolution("Employee Not Found");
         return new ResponseEntity<>(dto , HttpStatus.NOT_FOUND);
     }
+
     @ExceptionHandler(DepartmentNotFoundException.class)
     public ResponseEntity<ExceptionDto> handleDepartmentNotFoundException(DepartmentNotFoundException e) {
         ExceptionDto dto = new ExceptionDto();
@@ -27,6 +28,7 @@ public class GlobalExceptionHandler {
         dto.setResolution("Department Not Found");
         return new ResponseEntity<>(dto , HttpStatus.NOT_FOUND);
     }
+
     @ExceptionHandler(RoleNotFoundException.class)
     public ResponseEntity<ExceptionDto> handleRoleNotFoundException(RoleNotFoundException e) {
         ExceptionDto dto = new ExceptionDto();
@@ -34,11 +36,20 @@ public class GlobalExceptionHandler {
         dto.setResolution("Role Not Found");
         return new ResponseEntity<>(dto, HttpStatus.NOT_FOUND);
     }
+
     @ExceptionHandler(AdminNotFoundException.class)
-    public ResponseEntity<ExceptionDto> handleAdimNotFoundException(AdminNotFoundException e) {
+    public ResponseEntity<ExceptionDto> handleAdminNotFoundException(AdminNotFoundException e) {
         ExceptionDto dto = new ExceptionDto();
         dto.setMessage(e.name + " not found");
         dto.setResolution("Cannot authorise");
         return new ResponseEntity<>(dto, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ExceptionDto> handleException(Exception e) {
+        ExceptionDto dto = new ExceptionDto();
+        dto.setMessage("Internal Server Error");
+        dto.setResolution("Contact Admin");
+        return new ResponseEntity<>(dto, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
