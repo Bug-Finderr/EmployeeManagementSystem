@@ -1,19 +1,17 @@
-package com.bugfi.employeemanagementsystem.Services;
+package com.bugfi.employeemanagementsystem.services;
 
 import com.bugfi.employeemanagementsystem.exceptions.AdminNotFoundException;
 import com.bugfi.employeemanagementsystem.models.Admin;
 import com.bugfi.employeemanagementsystem.models.Employee;
 import com.bugfi.employeemanagementsystem.repository.EmployeeRepository;
-import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 
-import com.bugfi.employeemanagementsystem.Services.IEmployeeServices;
-@Service
-public class Employeeservice implements IEmployeeServices {
+public class EmployeeService implements IEmployeeServices {
 
     private EmployeeRepository employeeRepository;
-    com.bugfi.employeemanagementsystem.Services.AdminServices adminServices;
+    AdminServices adminServices;
     @Override
     public List<Employee> getAllEmployees() {
         return (List<Employee>) employeeRepository.findAll();
@@ -53,8 +51,8 @@ public class Employeeservice implements IEmployeeServices {
     public void verifyAdmin(Admin admin) {
         String password = admin.getPassword();
         try {
-            Admin verif = adminServices.getAdmin(admin);
-            if (!password.equals(verif.getPassword())) {
+            Admin verify = adminServices.getAdmin(admin);
+            if (!password.equals(verify.getPassword())) {
                 throw new AdminNotFoundException("Admin not found", "Invalid password");
             }
         } catch (AdminNotFoundException e) {
