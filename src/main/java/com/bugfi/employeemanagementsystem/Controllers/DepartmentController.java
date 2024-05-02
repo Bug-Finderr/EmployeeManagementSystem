@@ -1,54 +1,51 @@
-package com.bugfi.employeemanagementsystem.Controllers;
+package com.bugfi.employeemanagementsystem.controllers;
+import com.bugfi.employeemanagementsystem.dtos.AdminDepartmentDto;
+import com.bugfi.employeemanagementsystem.exceptions.AdminNotFoundException;
+import com.bugfi.employeemanagementsystem.exceptions.DepartmentNotFoundException;
 import com.bugfi.employeemanagementsystem.models.Admin;
 import com.bugfi.employeemanagementsystem.models.Department;
-import com.bugfi.employeemanagementsystem.services.IDepartmentServices;
+import com.bugfi.employeemanagementsystem.services.department.IDepartmentServices;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
+@RestController
+@AllArgsConstructor
+@RequestMapping("/department")
 public class DepartmentController{
+    private final IDepartmentServices services;
 
-    private IDepartmentServices services;
-    public DepartmentController(IDepartmentServices services){
-        this.services = services;
+    @GetMapping("")
+    public List<Department> getAllDepartments(){
+        return this.services.getAllDepartments();
     }
 
-    @GetMapping("/departments/getAll")
-    public List<Department> getAllDepartments(@RequestBody Admin admin){
-        List<Department> departments = this.services.getAllDepartments(admin);
-        return departments;
+    @GetMapping("/{id}")
+    public Optional<Department> getDepartmentById(@PathVariable("id") Long id) throws DepartmentNotFoundException {
+        return services.getDepartmentById(id);
     }
 
-    @GetMapping("/departments/{id}")
-    public Optional<Department> getDepartmentById(@PathVariable("id") Long id){
-        Optional<Department> department = services.getDepartmentById(id);
-        return department;
+    @PostMapping("")
+    public Department addDepartment(@RequestBody AdminDepartmentDto adminDepartmentDto) throws AdminNotFoundException {
+        return services.addDepartment(adminDepartmentDto.getDepartment(), adminDepartmentDto.getAdmin());
     }
 
-    @PostMapping("/departments/add")
-    public void addDepartment(@RequestBody Admin admin,@RequestBody Department department){
-        services.addDepartment(department,admin);
-        Long id = department.getId();
-        System.out.println("Successfully added a new department with department id"+ id);
+    @PatchMapping("/{id}")
+    public Department updateDepartment(@PathVariable("id") Long id, @RequestBody AdminDepartmentDto adminDepartmentDto) throws DepartmentNotFoundException, AdminNotFoundException {
+        return services.updateDepartment(id, adminDepartmentDto.getDepartment(), adminDepartmentDto.getAdmin());
     }
 
-    @PostMapping("/departments/update")
-    public void updateDepartment(@RequestBody Admin admin,@RequestBody Department department){
-        Long id = department.getId();
-        services.updateDepartment(department,id,admin);
-        System.out.println("Succeessfully updated the department with department id "+ id);
-    }
-
-    @DeleteMapping("/departments/deleteAll")
-    public void deleteAllDepartments(@RequestBody Admin admin){
+    @DeleteMapping("")
+    public String deleteAllDepartments(@RequestBody Admin admin) throws AdminNotFoundException {
         services.deleteAllDepartments(admin);
-        System.out.println("Successfully delted all the departments");
+        return "Successfully deleted all the departments in the database";
     }
 
-    @DeleteMapping("/departments/delete/{id}")
-    public void deleteDepartmentbyId(@PathVariable("id") Long id,@RequestBody Admin admin){
+    @DeleteMapping("/{id}")
+    public String deleteDepartmentById(@PathVariable("id") Long id,@RequestBody Admin admin) throws DepartmentNotFoundException, AdminNotFoundException {
         services.deleteDepartmentByID(id, admin);
-        System.out.println("Successfully deleted the department with id "+id);
+        return "Successfully deleted the department with department id: " + id;
     }
 }

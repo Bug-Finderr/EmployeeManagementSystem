@@ -1,10 +1,10 @@
 package com.bugfi.employeemanagementsystem.exceptions;
 
 public class EmployeeNotFoundException extends Exception {
-    public Long id;
+    public String name;
 
-    public EmployeeNotFoundException(Long id,String message) {
+    public EmployeeNotFoundException(String message, String name) {
         super(message);
-        this.id = id;
+        this.name = name;
     }
 }

@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
-public class GlobalExceptionHandler {
+public class GlobalExceptionHandler extends Exception{
     @ExceptionHandler(EmployeeNotFoundException.class)
     public ResponseEntity<ExceptionDto> handleEmployeeNotFoundException(EmployeeNotFoundException e) {
         ExceptionDto dto = new ExceptionDto();
-        dto.setMessage("Invalid id " + e.id + " passed");
+        dto.setMessage("Invalid id " + e.name + " passed");
         dto.setResolution("Employee Not Found");
         return new ResponseEntity<>(dto , HttpStatus.NOT_FOUND);
     }
@@ -40,8 +40,8 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(AdminNotFoundException.class)
     public ResponseEntity<ExceptionDto> handleAdminNotFoundException(AdminNotFoundException e) {
         ExceptionDto dto = new ExceptionDto();
-        dto.setMessage(e.name + " not found");
-        dto.setResolution("Cannot authorise");
+        dto.setMessage("Invalid Username or Password");
+        dto.setResolution("Please check your credentials");
         return new ResponseEntity<>(dto, HttpStatus.NOT_FOUND);
     }
 

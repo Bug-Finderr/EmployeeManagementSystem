@@ -1,32 +1,42 @@
-package com.bugfi.employeemanagementsystem.Controllers;
+package com.bugfi.employeemanagementsystem.controllers;
 
+import com.bugfi.employeemanagementsystem.exceptions.AdminNotFoundException;
 import com.bugfi.employeemanagementsystem.models.Admin;
-import org.springframework.stereotype.Service;
-import com.bugfi.employeemanagementsystem.services.IAdminServices;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import com.bugfi.employeemanagementsystem.services.admin.IAdminServices;
+import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+import java.util.List;
 
-@Service
+@RestController
+@AllArgsConstructor
+@RequestMapping("/admin")
 public class AdminController {
+    private final IAdminServices services;
 
-    private IAdminServices services;
-
-    public AdminController(IAdminServices services){
-        this.services = services;
+    @PostMapping("")
+    public Admin addAdmin(@RequestBody Admin admin) {
+        return services.addAdmin(admin);
     }
 
-    @PostMapping("/admin/add")
-    public void addAdmin(@RequestBody Admin admin){
-        services.addAdmin(admin);
+    @GetMapping("{id}")
+    public Admin getAdminById(@PathVariable("id") Long id) throws AdminNotFoundException {
+        return services.getAdminById(id);
     }
 
-    @GetMapping("/admin/get")
-    public void getAdmin(@RequestBody Admin admin){
-         services.getAdmin(admin);
-
+    @GetMapping("")
+    public List<Admin> getAllAdmins() {
+        return services.getAllAdmins();
     }
 
+    @PatchMapping("")
+    public Admin updateAdmin(@RequestBody Admin admin) throws AdminNotFoundException {
+        return services.updateAdmin(admin);
+    }
+
+    @DeleteMapping("")
+    public String deleteAdmin(@RequestBody Admin admin) throws AdminNotFoundException {
+        services.deleteAdmin(admin);
+        return "Successfully deleted the admin with id: " + admin.getId();
+    }
 }

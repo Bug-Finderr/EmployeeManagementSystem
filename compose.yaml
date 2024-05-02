@@ -6,4 +6,4 @@ services:
       - 'POSTGRES_PASSWORD=group13'
       - 'POSTGRES_USER=group13'
     ports:
-      - '6969:5432'
+      - '6900:5432'
