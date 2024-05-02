@@ -9,6 +9,9 @@ The Employee Management System is a Java project built using Spring Boot. It fac
 - **Web Interface**: Provides a web interface accessible through Tomcat server.
 - **Docker Compatibility**: Integrated with Docker Compose for deployment.
 
+### Class Diagram
+![class_diagram_img](./images/class_diagram.jpeg)
+
 ### Setup
 1. **Dependencies**: Requires Java 22.0.1 and PostgreSQL 16.2.
 2. **Database Configuration**: Connects to PostgreSQL database via JDBC URL `jdbc:postgresql://127.0.0.1:6900/employee`.
